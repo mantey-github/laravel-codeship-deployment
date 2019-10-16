@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Url;
 use Illuminate\Http\Request;
 use Illuminate\Session\Store;
-use Zenapply\Shortener\Shortener;
+use LeadThread\Shortener\Facades\Shortener;
 
 /**
  * Class UrlController
@@ -69,7 +69,7 @@ class UrlController extends Controller
     {
         $url = new Url();
         $url->original_url = $request->input('url');
-        $url->shortened_url = $shortener->shorten($request->input('url'));
+        $url->shortened_url = Shortener::shorten($request->input('url'));
 
         return $url->saveOrFail();
     }
